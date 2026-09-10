@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSkipper | Watch YouTube Without Interruptions</title>
+    <!-- Import a clean, modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; color: #1a1a1a; line-height: 1.6; }
+        a { text-decoration: none; }
+        
+        /* Reusable Components */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 16px 32px; font-size: 18px; font-weight: 600; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; border: none; }
+        .btn-primary { background: #635bff; color: #fff; box-shadow: 0 4px 14px 0 rgba(99, 91, 255, 0.39); }
+        .btn-primary:hover { background: #4b45c6; transform: translateY(-1px); }
+        .text-highlight { color: #635bff; }
+        .trust-badge { display: block; margin-top: 15px; font-size: 14px; color: #10a37f; font-weight: 600; }
+
+        /* Navigation */
+        nav { padding: 25px 0; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.5px; }
+        .nav-cta { padding: 10px 20px; font-size: 15px; }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 80px 0 60px; }
+        .hero h1 { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1.5px; transition: color 0.3s; }
+        .hero p { font-size: 20px; color: #4a4a4a; max-width: 600px; margin: 0 auto 40px; }
+        .hero-visual { margin: 50px auto 0; max-width: 800px; height: 450px; background: #e9ecef; border-radius: 16px; border: 1px solid #dee2e6; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
+
+        /* Pricing Comparison Section */
+        .comparison { background: #fff; padding: 80px 0; border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea; }
+        .section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; letter-spacing: -1px; }
+        .cards-wrapper { display: flex; gap: 30px; justify-content: center; align-items: stretch; }
+        .card { flex: 1; max-width: 450px; background: #f8f9fa; border-radius: 16px; padding: 40px; border: 2px solid #eaeaea; text-align: center; }
+        .card.highlight { background: #fff; border-color: #10a37f; box-shadow: 0 20px 40px rgba(16, 163, 127, 0.15); position: relative; }
+        .card-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #10a37f; color: white; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+        .card-title { font-size: 22px; font-weight: 600; margin-bottom: 15px; color: #4a4a4a; }
+        .card-price { font-size: 48px; font-weight: 800; margin-bottom: 10px; color: #1a1a1a; }
+        .card-price span { font-size: 18px; color: #666; font-weight: 400; }
+        .card-subtext { font-size: 16px; color: #666; font-weight: 600; }
+        .card.highlight .card-title { color: #10a37f; }
+
+        .strikethrough-red { text-decoration: line-through; text-decoration-color: #d93025; text-decoration-thickness: 3px; }
+
+        /* 3-Step Setup Section */
+        .steps { padding: 100px 0 60px; text-align: center; }
+        .steps-grid { display: flex; gap: 40px; justify-content: space-between; margin-top: 60px; }
+        .step { flex: 1; text-align: left; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #eaeaea; }
+        .step-num { display: inline-block; width: 40px; height: 40px; background: #ebf5ff; color: #635bff; border-radius: 50%; text-align: center; line-height: 40px; font-size: 20px; font-weight: 800; margin-bottom: 20px; }
+        .step h3 { font-size: 20px; margin-bottom: 10px; color: #1a1a1a; }
+        .step p { color: #666; font-size: 15px; }
+
+        /* FAQ Section */
+        .faq { padding: 60px 0 100px; background: #f8f9fa; }
+        .faq-container { max-width: 800px; margin: 0 auto; text-align: left; }
+        .faq-item { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .faq-item summary { font-weight: 600; font-size: 18px; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; color: #1a1a1a; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:after { content: '+'; font-size: 24px; color: #635bff; font-weight: 400; transition: transform 0.2s ease; }
+        .faq-item[open] summary:after { transform: rotate(45deg); }
+        .faq-content { padding: 0 20px 20px; color: #4a4a4a; font-size: 16px; line-height: 1.6; }
+
+        /* Footer */
+        footer { background: #1a1a1a; color: #fff; padding: 40px 0; text-align: center; font-size: 14px; color: #888; }
+        footer a { color: #fff; margin: 0 10px; transition: color 0.2s; }
+        footer a:hover { color: #10a37f; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 38px; }
+            .hero-visual { height: 250px; }
+            .cards-wrapper { flex-direction: column; align-items: center; }
+            .steps-grid { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="logo">AutoSkipper</div>
+            <a href="https://chromewebstore.google.com/detail/ifhpfbfhoeejcehdipmlfnbbbombejlh" target="_blank" class="btn btn-primary nav-cta">Add to Chrome</a>
+        </nav>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="hero container">
+        <h1>Watch YouTube Without<br><span class="text-highlight">the Interruptions.</span></h1>
+        <p>AutoSkipper is a lightweight Chrome extension that automatically clears interruptions and bypasses "Continue watching?" prompts within a few seconds.</p>
+        
+        <a href="https://chromewebstore.google.com/detail/ifhpfbfhoeejcehdipmlfnbbbombejlh" target="_blank" class="btn btn-primary">Add to Chrome - Free Trial</a>
+        <!-- Added Trust Badge below the CTA -->
+        <span class="trust-badge">✅ 100% Safe: Automates your experience without triggering ad-blocker warnings.</span>
+        
+        <div class="hero-visual">
+            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="autoskipper-demo.mp4" type="video/mp4">
+            </video>
+        </div>
+    </header>
+
+    <!-- COMPARISON SECTION -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">Why pay Google $192 a year?</h2>
+            
+            <div class="cards-wrapper">
+                <!-- Card 1: The Anchor -->
+                <div class="card">
+                    <div class="card-title">YouTube Premium</div>
+                    <div class="card-price"><span class="strikethrough-red">$15.99</span><span> /mo</span></div>
+                    <p class="card-subtext">Roughly $192 every year.</p>
+                </div>
+
+                <!-- Card 2: AutoSkipper Monthly -->
+                <div class="card">
+                    <div class="card-title">AutoSkipper Monthly</div>
+                    <div class="card-price">$4.00<span> /mo</span></div>
+                    <p class="card-subtext" style="white-space: nowrap;">Billed monthly. 7-day free trial.</p>
+                </div>
+
+                <!-- Card 3: AutoSkipper Yearly -->
+                <div class="card highlight">
+                    <div class="card-badge">Save 25%</div>
+                    <div class="card-title">AutoSkipper Yearly</div>
+                    <div class="card-price">$3.00<span> /mo</span></div>
+                    <p class="card-subtext" style="white-space: nowrap;">Billed as $36 yearly. 7-day free trial.</p>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-size: 14px; color: #666; line-height: 1.6;">
+                ☕ <strong>Less than a coffee:</strong> Reclaim hours of your time for less than the cost of a cup of good coffee every month.<br>
+                🚀 <strong style="font-style: italic;">Early Adopter Pricing:</strong> <span style="font-style: italic;">Rates are locked in for our first 1,000 active subscribers.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- 3-STEP SETUP -->
+    <section class="steps container">
+        <h2 class="section-title">Seamless Setup</h2>
+        
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Add to Chrome</h3>
+                <p>Click the install button to add AutoSkipper to your browser in under three seconds. No large downloads or technical configuration required.</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Start Free Trial</h3>
+                <p>Click the puzzle piece icon in your toolbar to activate your risk-free 7-day trial. No credit card required upfront.</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Undetectable & Safe</h3>
+                <p>Unlike traditional network blockers that put your account at risk, AutoSkipper acts as an intelligent automation assistant. It clears interruptions natively, ensuring your account remains 100% compliant and penalty-free.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq">
+        <div class="container faq-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <details class="faq-item">
+                <summary>Will YouTube block my video player for using this?</summary>
+                <div class="faq-content">
+                    Absolutely not. YouTube actively penalizes traditional network blockers because they block network requests and prevent media from loading entirely. AutoSkipper is an automation tool, not a network blocker. It seamlessly interacts with the standard video player environment, making it fully compliant and undetectable by anti-adblock scripts.
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How is AutoSkipper different from traditional network blockers?</summary>
+                <div class="faq-content">
+                    Standard blockers forcefully stop video files from communicating with the server, which immediately flags your account and triggers warning popups. AutoSkipper uses a completely different, proprietary automation approach to clear interruptions instantly without breaking the platform's rules.
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Will this slow down my browser?</summary>
+                <div class="faq-content">
+                    Not at all. AutoSkipper is an incredibly lightweight extension that sits completely dormant until an interruption appears on your screen. It uses virtually zero system resources and will never slow down your daily browsing.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 AutoSkipper.app. All rights reserved.</p>
+            <div style="margin-top: 15px;">
+                <!-- Replace with your actual Privacy Policy link when ready -->
+                <a href="https://docs.google.com/document/d/1MR9blCiNYnj28h3xMMT42lKzeHr91RfZva66Kd8tiyU/edit?usp=sharing">Privacy Policy</a> | 
+                <a href="mailto:support@autoskipper.app">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
