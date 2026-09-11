@@ -42,6 +42,16 @@ AutoSkipper is built on the modern WebExtensions standard, ensuring native compa
 
 To run this extension locally for development or testing:
 
-1. Clone this repository:
-   ```bash
-   git clone [https://github.com/yourusername/autoskipper.git](https://github.com/yourusername/autoskipper.git)
+1. Clone this repository: `git clone https://github.com/yourusername/autoskipper.git`
+2. Open your Chromium-based browser and navigate to the extensions page (e.g., `chrome://extensions/`).
+3. Enable **Developer mode** in the top right corner.
+4. Click **Load unpacked** and select the directory where you cloned the repository.
+5. The AutoSkipper icon should now appear in your browser toolbar.
+
+## 📬 Contact & Support
+
+For support, feedback, or business inquiries, please reach out via email:
+**Email:** [support@autoskipper.app](mailto:support@autoskipper.app)
+
+---
+*Developed by Marijonas Rocius*
